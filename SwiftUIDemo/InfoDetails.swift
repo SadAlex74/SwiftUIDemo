@@ -8,11 +8,24 @@
 import SwiftUI
 
 struct InfoDetails: View {
+    var post: Post
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        post.image
+            .resizable()
+            .scaledToFit()
+            .frame(width: 150)
+            .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+        Text(post.title)
+            .fontWeight(.heavy)
+        ScrollView {
+            Text(post.description)
+                .padding(16)
+            
+        }
     }
 }
 
 #Preview {
-    InfoDetails()
+    InfoDetails(post: model[0])
 }

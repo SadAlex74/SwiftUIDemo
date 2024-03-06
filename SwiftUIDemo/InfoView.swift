@@ -9,7 +9,17 @@ import SwiftUI
 
 struct InfoView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            List(model){ post in
+                NavigationLink {
+                    InfoDetails(post: post)
+                } label: {
+                    InfoRow(post: post)
+                }
+                .navigationTitle("Где я был...")
+                
+            }
+        }
     }
 }
 
