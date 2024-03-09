@@ -19,9 +19,9 @@ struct ContentView: View {
                     Label("Страны", systemImage: "globe.asia.australia")
                 }
             
-            HelloView()
-                .tabItem { 
-                    Label("Hello!", systemImage: "hand.wave")
+            MapView()
+                .tabItem {
+                    Label("Карта", systemImage: "map")
                 }
             SettingsView(titleOn: $titleOn, heightRow: $heightRow)
                 .tabItem {
