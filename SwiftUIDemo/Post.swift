@@ -6,12 +6,12 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct Post: Identifiable {
-    var id: Int
-    
+    let id = UUID()
     var title: String
     var description: String
     var image: Image
-    
+    var location: MapMarker
 }
