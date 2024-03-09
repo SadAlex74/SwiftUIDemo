@@ -7,26 +7,32 @@
 
 import SwiftUI
 
+enum Flavor: String, CaseIterable, Identifiable {
+    case chocolate, vanilla, strawberry
+    var id: Self { self }
+}
+
 struct SettingsView: View {
-    enum Flavor: String, CaseIterable, Identifiable {
-        case chocolate, vanilla, strawberry
-        var id: Self { self }
-    }
 
-
+    @Binding var titleOn: Bool
+    @Binding var heightRow: Double
+    
+    @Environment(\.colorScheme) var colorScheme
+    
     @State private var selectedFlavor: Flavor = .chocolate
-    @State private var toggleIsOn = false
-    @State private var sliderVelue = 0.0
     @State private var isEditing = false
     
     var body: some View {
         Form {
             Section {
-                Text("Демонстрация вывода текста")
+                Text("Установлена \(colorScheme == .dark ? "темная" : "светлая") тема" )
             }
             
             Section {
-                Toggle("Переключатель", isOn: $toggleIsOn)
+                Toggle("Заголовок", isOn: $titleOn)
+                if titleOn == true {
+                    Text("Navigation title enabled")
+                }
             }
             Section {
                 Picker("Вкус", selection: $selectedFlavor) {
@@ -37,16 +43,18 @@ struct SettingsView: View {
                 .pickerStyle(.menu)
             }
             Section {
-                Slider(value: $sliderVelue, in: 0...100, step: 1, onEditingChanged: { editing in
+                Text("Высота строки в списке стран")
+                Slider(value: $heightRow, in: 50...100, step: 1, onEditingChanged: { editing in
                     isEditing = editing
                 } )
-                Text("\(Int(sliderVelue))")
-                    .foregroundColor(isEditing ? .red : .blue)
+                if isEditing {
+                    InfoRow(post: model[0], heightRow: heightRow)
+                }
             }
         }
     }
 }
 
 #Preview {
-    SettingsView()
+    SettingsView(titleOn: .constant(true), heightRow: .constant(50.0))
 }

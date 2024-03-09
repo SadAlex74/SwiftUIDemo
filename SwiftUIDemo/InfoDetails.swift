@@ -10,19 +10,23 @@ import SwiftUI
 struct InfoDetails: View {
     var post: Post
     var body: some View {
-        
-        post.image
-            .resizable()
-            .scaledToFit()
-            .frame(width: 150)
-            .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
-        Text(post.title)
-            .fontWeight(.heavy)
+        HStack{
+            post.image
+                .resizable()
+                .scaledToFit()
+                .frame(width: 150)
+                .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+            Text(post.title)
+                .fontWeight(.heavy)
+                .padding(.leading)
+           Spacer()
+            }
+        .padding()
         ScrollView {
             Text(post.description)
                 .padding(16)
-            
         }
+    
     }
 }
 
